@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import axios from "axios";
 import ScoopOption from "./ScoopOption";
+import ToppingOption from "./ToppingOption";
 
 export const BASE_URL = 'http://localhost:3030'
 
@@ -18,7 +19,7 @@ const Options: FC<{ optionType: EOptionType }> = ({ optionType}) => {
       .catch((err) => {})
   }, [optionType])
 
-  const ItemComponent = optionType === EOptionType.scoops ? ScoopOption : null
+  const ItemComponent = optionType === EOptionType.scoops ? ScoopOption : ToppingOption
 
   const optionItems = items.map((el) => (
     <ItemComponent

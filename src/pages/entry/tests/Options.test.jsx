@@ -19,6 +19,6 @@ describe('Options', () => {
     expect(images).toHaveLength(3)
 
     const altTexts = images.map(({ alt }) => alt)
-    expect(altTexts).toEqual(['cherries', 'm&m', 'hot fudge'])
+    expect(altTexts).toEqual(['cherries topping', 'm&m topping', 'hot fudge topping'])
   })
 })
