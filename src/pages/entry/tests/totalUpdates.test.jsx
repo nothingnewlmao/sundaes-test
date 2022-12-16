@@ -44,20 +44,13 @@ describe('Total', () => {
   })
 
   describe('Grand total', () => {
-    test('grand total is zero', () => {
-      render(<OrderEntry />)
-
-      const totalTitle = screen.getByRole('heading', { name: /grand total: /i })
-
-      expect(totalTitle).toHaveTextContent('$0.00')
-    })
-
     test('grand total updates properly if scoop is added first', async () => {
       const user = userEvent.setup()
       render(<OrderEntry />)
 
       const chocolateInput = await screen.findByRole('spinbutton', { name: /chocolate/i })
       const grandTotalTitle = screen.getByRole('heading', { name: /grand total/i })
+      expect(grandTotalTitle).toHaveTextContent('$0.00')
 
       await user.clear(chocolateInput)
       await user.type(chocolateInput, '2')
