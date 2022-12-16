@@ -5,7 +5,7 @@ import ToppingOption from "./ToppingOption";
 import {Alert, Row } from "react-bootstrap";
 import {pricePerItem} from "../../constants";
 import { formatCurrency } from "../../utilities";
-import { useOrderDetails } from "../../contexts/OrderDetails";
+import { useOrderDetails } from '../../contexts/OrderDetails';
 
 export const BASE_URL = 'http://localhost:3030'
 export const ERR_TEXT = 'an unexpected error occurred'
