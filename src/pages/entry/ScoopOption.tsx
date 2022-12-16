@@ -1,11 +1,21 @@
 import {FC} from "react";
-import { BASE_URL} from "./Options";
+import {BASE_URL, EOptionType} from "./Options";
+import {Col, Form, Row} from "react-bootstrap";
+import { useOrderDetails } from "../../contexts/OrderDetails";
 
 const ScoopOption: FC<IScoopOption> = ({ name, imageUrl }) => {
+  const { updateItemCount } = useOrderDetails()
+
+  const handleChange = (e) => updateItemCount(name, parseInt(e.target.value), EOptionType.scoops)
+
   return (
-    <div>
+    <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: 'center' }}>
       <img src={`${BASE_URL}${imageUrl}`} alt={`${name} scoop`}/>
-    </div>
+      <Form.Group controlId={`${name}-count`} as={Row}>
+      <Form.Label>{name}</Form.Label>
+        <Form.Control type="number" defaultValue={0} onChange={handleChange} />
+      </Form.Group>
+    </Col>
   )
 }
 

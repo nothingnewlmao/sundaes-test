@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/test-utils";
 import Options, { EOptionType } from "../Options";
 
 describe('Options', () => {
