@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import axios from "axios";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
@@ -19,6 +19,7 @@ const Options: FC<{ optionType: EOptionType }> = ({ optionType}) => {
   const [items, setItems] = useState([])
   const [error, setError] = useState(false)
 
+  // @ts-ignore
   const { totals } = useOrderDetails()
 
   useEffect(() => {

@@ -1,7 +1,8 @@
-import {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import {EOptionType} from "../pages/entry/Options";
 import {pricePerItem} from "../constants";
 
+// @ts-ignore
 const OrderDetails = createContext()
 
 export const useOrderDetails = () => {
@@ -30,6 +31,7 @@ export const OrderDetailsProvider = (props) => {
   const resetOrder = () => setOptionsCounts({ scoops: {}, toppings: {} })
 
   const calculateTotal = (optionType: EOptionType) => {
+    // @ts-ignore
     const items: number[] = Object.values(optionCounts[optionType])
 
     const totalCount: number = items.reduce((total: number, current: number) => current + total, 0)

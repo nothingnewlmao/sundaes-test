@@ -1,9 +1,10 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import {BASE_URL, EOptionType} from "./Options";
 import {useOrderDetails} from "../../contexts/OrderDetails";
 
 const ToppingOption: FC<IToppingOption> = ({ name, imageUrl }) => {
 
+  // @ts-ignore
   const { updateItemCount } = useOrderDetails()
 
   const handleCheck = (e) =>  updateItemCount(

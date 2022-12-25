@@ -28,5 +28,14 @@ export const handlers = [
         { name: 'hot fudge', imageUrl: '/images/hot-fudge.png'}
       ])
     )
+  }),
+  rest.post(`${BASE_URL}/order`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        orderId: ORDER_NUMBER
+      })
+    )
   })
 ]
+
+export const ORDER_NUMBER = 'alsdkfhj123-alkf-123'

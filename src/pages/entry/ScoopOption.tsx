@@ -1,9 +1,10 @@
-import {FC} from "react";
+import React,  {FC} from "react";
 import {BASE_URL, EOptionType} from "./Options";
 import {Col, Form, Row} from "react-bootstrap";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 
 const ScoopOption: FC<IScoopOption> = ({ name, imageUrl }) => {
+  // @ts-ignore
   const { updateItemCount } = useOrderDetails()
 
   const handleChange = (e) => updateItemCount(name, parseInt(e.target.value), EOptionType.scoops)

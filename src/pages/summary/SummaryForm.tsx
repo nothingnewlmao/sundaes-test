@@ -1,7 +1,8 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Form, Button } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import {EStatuses, useAppStateCtx} from "../../contexts/AppState";
 
 const popover = (
   <Popover id="popover-basic">
@@ -14,6 +15,8 @@ const popover = (
 
 const SummaryForm: FC = () => {
   const [tcChecked, setTcChecked] = useState(false)
+
+  const { updateState } = useAppStateCtx()
 
   const checkboxLabel = (
       <div>
@@ -37,7 +40,14 @@ const SummaryForm: FC = () => {
           onChange={(e) => setTcChecked(e.target.checked)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={!tcChecked}>send order</Button>
+      <Button
+        variant="primary"
+        type="submit"
+        disabled={!tcChecked}
+        onClick={() => updateState(EStatuses.complete)}
+      >
+        send order
+      </Button>
     </Form>
   )
 }
