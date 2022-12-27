@@ -10,7 +10,8 @@ const OrderEntry: FC<ICurrentBlock> = ({ changePhase }) => {
   // @ts-ignore
   const { totals } = useOrderDetails()
   const grandTotal = totals[EOptionType.scoops] + totals[EOptionType.toppings]
-
+  const disabledBtn = !totals[EOptionType.scoops]
+  console.log(totals)
 
   return (
     <>
@@ -18,7 +19,7 @@ const OrderEntry: FC<ICurrentBlock> = ({ changePhase }) => {
       <h2>Grand total: {formatCurrency(grandTotal)}</h2>
       <Options optionType={EOptionType.scoops}/>
       <Options optionType={EOptionType.toppings}/>
-      <Button onClick={() => changePhase(EStatuses.review)}>Create order</Button>
+      <Button disabled={disabledBtn} onClick={() => changePhase(EStatuses.review)}>Create order</Button>
     </>
   )
 }
