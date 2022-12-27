@@ -12,6 +12,7 @@ export const Confirmation: FC<ICurrentBlock> = ({ changePhase }) => {
 
   const [number, setNumber] = useState<string>('')
   const [isLoading, setLoading] = useState<boolean>(false)
+  const [isError, setError] = useState<boolean>(false)
 
   useEffect(() => {
     setLoading(true)
@@ -24,7 +25,7 @@ export const Confirmation: FC<ICurrentBlock> = ({ changePhase }) => {
         resetOrder()
       })
       .catch(() => {
-        //todo: errors handler
+        setError(true)
       })
       .finally(() => setLoading(false))
   }, [resetOrder])
@@ -32,6 +33,7 @@ export const Confirmation: FC<ICurrentBlock> = ({ changePhase }) => {
   return (
     <>
       {isLoading && (<p>Loading...</p>)}
+      {isError && (<p>Try Again Later!</p>)}
       {(!isLoading && number) && (<h1>Thank you for your order!</h1>)}
       {number && (
         <h1>order number: {number}</h1>
