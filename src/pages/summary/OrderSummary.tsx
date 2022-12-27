@@ -26,10 +26,12 @@ const OrderSummary: FC<ICurrentBlock> = ({ changePhase }) => {
       <ul>
         {scoops}
       </ul>
-      <h2>Toppings: {formatCurrency(totals[EOptionType.toppings])}</h2>
-      <ul>
-        {toppings}
-      </ul>
+      {totals[EOptionType.toppings] && (<>
+        <h2>Toppings: {formatCurrency(totals[EOptionType.toppings])}</h2>
+        <ul>
+          {toppings}
+        </ul>
+        </>)}
       <SummaryForm changePhase={changePhase} />
     </>
   )
