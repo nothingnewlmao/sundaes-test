@@ -11,15 +11,20 @@ const ScoopOption: FC<IScoopOption> = ({ name, imageUrl }) => {
 
 
   const handleChange = (e) => {
-    const isNumberInvalid = (num: number): boolean => num < 0 || ((num % 10) > 0) || num > 5
+    if (e.target.value === '') {
+      return
+    }
+    const isNumberInvalid = (num: number): boolean => num < 0 || num > 5
 
-    const { value } = e.target
+    const count = parseInt(e.target.value)
 
-    if (isNumberInvalid(value)) {
-      setInvalid(true)
+    setInvalid(isNumberInvalid(count))
+
+    if(isNumberInvalid(count)) {
+      e.preventDefault()
+      return
     } else {
-      setInvalid(false)
-      updateItemCount(name, parseInt(value), EOptionType.scoops)
+      updateItemCount(name, count, EOptionType.scoops)
     }
   }
 
