@@ -13,7 +13,7 @@ describe('OrderEntry', () => {
       rest.get(`${BASE_URL}/scoops`, (req, res, ctx) => res(ctx.status(500)))
     )
 
-    render(<OrderEntry />)
+    render(<OrderEntry changePhase={jest.fn()} />)
 
     await waitFor(async() => {
       const alertBanners = await screen.findAllByRole('alert')

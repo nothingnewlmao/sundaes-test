@@ -1,9 +1,8 @@
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { render } from '../test-utils/test-utils'
-import { screen as screenDebug } from '@testing-library/react'
 
 import App from "../App";
+import {ORDER_NUMBER} from "../mocks/handlers";
 
 describe('App', () => {
   test('order phases for happy path', async () => {
@@ -16,6 +15,8 @@ describe('App', () => {
     const createOrderBtn = screen.getByRole('button', { name: 'Create order' })
     await user.click(createOrderBtn)
 
+    const totalPrice = screen.getByRole('heading', { name: /scoops:/i })
+    expect(totalPrice).toHaveTextContent('6')
     const agreementCheckbox = screen.getByRole('checkbox', { name: /terms and conds/i })
     const sendOrderBtn = screen.getByRole('button', { name: 'send order' })
     await user.click(agreementCheckbox)
@@ -24,9 +25,11 @@ describe('App', () => {
     const createNewOrderBtn = screen.getByRole('button', { name: /create new order/i })
     const orderNumber = await screen.findByText(/order number/i)
     expect(orderNumber).toBeInTheDocument()
+    console.log(orderNumber.textContent)
+    expect(orderNumber).toHaveTextContent(ORDER_NUMBER)
 
     await user.click(createNewOrderBtn)
-    const h1DesignSundae = screen.getByRole('heading', { name: /design sundae/i })
-    expect(h1DesignSundae).toBeInTheDocument()
+    const chocolateScoopRerendered = await screen.findByRole('spinbutton', { name: 'chocolate'})
+    expect(chocolateScoopRerendered.value).toEqual("0")
   })
 })

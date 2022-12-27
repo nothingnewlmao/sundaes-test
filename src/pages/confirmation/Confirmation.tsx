@@ -1,34 +1,38 @@
-import React, {useEffect, useState} from 'react'
-import {EStatuses, useAppStateCtx} from "../../contexts/AppState";
+import React, {FC, useEffect, useState} from 'react'
+import {EStatuses} from "../../contexts/AppState";
 import axios from "axios";
 import {Button} from "react-bootstrap";
 import {BASE_URL} from "../entry/Options";
+import {useOrderDetails} from "../../contexts/OrderDetails";
+import {ICurrentBlock} from "../../types";
 
-export const Confirmation = () => {
-  const { state, updateState } = useAppStateCtx()
+export const Confirmation: FC<ICurrentBlock> = ({ changePhase }) => {
+  const { resetOrder } = useOrderDetails()
 
   const [number, setNumber] = useState<string>('')
 
   useEffect(() => {
-    if (state === EStatuses.complete) {
       axios
         .post(`${BASE_URL}/order`, {
         params: {}
       })
-        .then(({ data }) => setNumber(data.orderId))
+        .then(({ data }) => {
+          setNumber(data.orderId)
+
+          resetOrder()
+        })
         .catch(() => {
           //todo: errors handler
         })
-    }
-  }, [state])
+  }, [resetOrder])
 
-  return state !== EStatuses.complete ? null : (
+  return (
     <>
       {number && (
         <h1>order number: {number}</h1>
       )}
       <Button
-        onClick={() => updateState(EStatuses.inProgress)}
+        onClick={() => changePhase(EStatuses.inProgress)}
       >
         CREATE NEW ORDER
       </Button>

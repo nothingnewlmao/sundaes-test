@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import {EStatuses, useAppStateCtx} from "../../contexts/AppState";
+import {ICurrentBlock} from "../../types";
 
 const popover = (
   <Popover id="popover-basic">
@@ -13,10 +14,9 @@ const popover = (
   </Popover>
 );
 
-const SummaryForm: FC = () => {
+const SummaryForm: FC<ICurrentBlock> = ({ changePhase }) => {
   const [tcChecked, setTcChecked] = useState(false)
 
-  const { updateState } = useAppStateCtx()
 
   const checkboxLabel = (
       <div>
@@ -44,7 +44,7 @@ const SummaryForm: FC = () => {
         variant="primary"
         type="submit"
         disabled={!tcChecked}
-        onClick={() => updateState(EStatuses.complete)}
+        onClick={() => changePhase(EStatuses.complete)}
       >
         send order
       </Button>

@@ -2,8 +2,35 @@ import React, {createContext, useContext, useState} from "react";
 import {EOptionType} from "../pages/entry/Options";
 import {pricePerItem} from "../constants";
 
-// @ts-ignore
-const OrderDetails = createContext()
+interface IOrderDetailsCtx {
+  optionCounts: {
+    [EOptionType.scoops]: Record<string, number>,
+    [EOptionType.toppings]: Record<string, number>,
+  },
+  totals: {
+    [EOptionType.scoops]: number,
+    [EOptionType.toppings]: number,
+  },
+  updateItemCount: (
+    itemName: string,
+    newItemCount: number,
+    optionType: EOptionType
+  ) => void,
+  resetOrder: () => void,
+}
+
+const OrderDetails = createContext<IOrderDetailsCtx>({
+  optionCounts: {
+    scoops: {},
+    toppings: {}
+  },
+  totals: {
+    scoops: 0,
+    toppings: 0,
+  },
+  updateItemCount: () => {},
+  resetOrder: () => {}
+})
 
 export const useOrderDetails = () => {
   const ctxValue = useContext(OrderDetails)

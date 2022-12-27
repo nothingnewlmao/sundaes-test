@@ -1,14 +1,12 @@
-import React from "react";
+import React, {FC} from "react";
 import SummaryForm from "./SummaryForm";
 import {EOptionType} from "../entry/Options";
 import { formatCurrency} from "../../utilities";
 import {useOrderDetails} from "../../contexts/OrderDetails";
-import {EStatuses, useAppStateCtx} from "../../contexts/AppState";
+import {ICurrentBlock} from "../../types";
 
-const OrderSummary = () => {
-  // @ts-ignore
+const OrderSummary: FC<ICurrentBlock> = ({ changePhase }) => {
   const { totals, optionCounts } = useOrderDetails()
-  const {state} = useAppStateCtx()
 
   // @ts-ignore
   const scoops = Object.entries(optionCounts[EOptionType.scoops])
@@ -21,7 +19,7 @@ const OrderSummary = () => {
   const toppings = Object.keys(optionCounts[EOptionType.toppings])
     .map((key) => <li key={key}>{key}</li>)
 
-  return (state !== EStatuses.review) ? null : (
+  return (
     <>
       <h1>order summary</h1>
       <h2>Scoops: {formatCurrency(totals[EOptionType.scoops])}</h2>
@@ -32,7 +30,7 @@ const OrderSummary = () => {
       <ul>
         {toppings}
       </ul>
-      <SummaryForm />
+      <SummaryForm changePhase={changePhase} />
     </>
   )
 }
