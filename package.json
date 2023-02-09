@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "netlify:build": "webpack",
     "netlify:serve": "node app.js",
-    "netlify:start": "npm run netlify:serve && npm run netlify:build"
+    "netlify:start": "npm run netlify:build && npm run netlify:serve"
   },
   "eslintConfig": {
     "extends": [
