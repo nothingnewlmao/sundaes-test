@@ -8,6 +8,8 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "esModuleInterop": true,
+    "jsx": "react"
   }
 }
